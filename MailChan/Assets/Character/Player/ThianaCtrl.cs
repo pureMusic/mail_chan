@@ -26,10 +26,11 @@ public class ThianaCtrl : MonoBehaviour {
 				//着地
 				if (rigidbody2D.velocity.y == 0 && jumpFlag) {
 						jumpFlag = false;
+
 				}
 
 				//落下
-				if (rigidbody2D.velocity.y < 0) {
+				if (rigidbody2D.velocity.y < -0.1f) {	//誤差修正のため0ではなく-0.1とする
 						jumpFlag = true;
 				}
 
@@ -45,8 +46,6 @@ public class ThianaCtrl : MonoBehaviour {
 						walkFlag = false;
 				else
 						walkFlag = true;
-
-				//Debug.Log("walk" + ":" + walkFlag);
 				
 				v.x = h * speed;
 				rigidbody2D.velocity = v;
@@ -64,7 +63,10 @@ public class ThianaCtrl : MonoBehaviour {
 				if (Input.GetKeyDown ("return")) {
 						Vector3 v3 = transform.position;
 						v3.x += 38 * getFacingRight();
-						Instantiate (bullet, v3, transform.rotation);
+						//Instantiate (bullet, v3, transform.rotation);
+						GameObject bulletCtrl = Instantiate (bullet, v3, transform.rotation) as GameObject;
+						Bullet b = bulletCtrl.GetComponent<Bullet> ();
+						b.ShotCtrl (facingRight);
 						shotFlag = true;
 						counter = 0;
 				}
@@ -79,17 +81,43 @@ public class ThianaCtrl : MonoBehaviour {
 				//アニメーション用フラグを設定
 				GetComponent<Animator> ().SetBool ("walkFlag", walkFlag);
 				GetComponent<Animator> ().SetBool ("shotFlag", shotFlag);
-				Debug.Log(shotFlag);
 
+				//デバッグ---------------------------------------------------
+				//MyDebug ();
+
+		}
+
+		//デバッグ用
+		void MyDebug(){
+				Debug.Log ("jumpFlag:" + jumpFlag);
+				Debug.Log ("v:" + rigidbody2D.velocity);
 		}
 		
 		
 		void FixedUpdate ()
 		{}
 
-
+		//向き判定
 		public int getFacingRight(){
 				return (facingRight ? 1 : -1);
 		}
+
+		//移動床の制御---------------------------------------------------------------
+
+		//床に乗る
+		void OnTriggerEnter2D(Collider2D col){
+				if (transform.parent == null && col.gameObject.tag == "MoveBlock") {
+						transform.parent = col.gameObject.transform;
+				}
+		}
+
+		//床から離れる
+		void OnTriggerExit2D(Collider2D col){
+				if(transform.parent != null && col.gameObject.tag == "MoveBlock"){
+						transform.parent = null;
+				}
+		}
+
+
 
 }

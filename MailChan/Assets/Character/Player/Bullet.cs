@@ -7,12 +7,20 @@ public class Bullet : MonoBehaviour {
 
 		// Use this for initialization
 		void Start () {
-				rigidbody2D.velocity = new Vector2 (bulletSpeed, 0);
+				//rigidbody2D.velocity = new Vector2 (bulletSpeed, 0);
 		}
 		
 		// Update is called once per frame
 		void Update () {
 		
+		}
+
+		public void ShotCtrl(bool vec){
+				if (vec) {
+						rigidbody2D.velocity = new Vector2 (bulletSpeed, 0);
+				} else {
+						rigidbody2D.velocity = new Vector2 (-1 * bulletSpeed, 0);
+				}
 		}
 
 		//画面外処理

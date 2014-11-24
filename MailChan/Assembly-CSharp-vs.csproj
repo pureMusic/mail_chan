@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Character\Player\Bullet.cs" />
      <Compile Include="Assets\Character\Player\ThianaCtrl.cs" />
+     <Compile Include="Assets\Scripts\BlockMove.cs" />
      <Compile Include="Assets\Stage\Camera.cs" />
      <Compile Include="Assets\Title\GameStart.cs" />
   </ItemGroup>

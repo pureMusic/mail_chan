@@ -2,8 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Character\Player\ThianaCtrl.cs">
     <Files>
-      <File FileName="Assets\Character\Player\ThianaCtrl.cs" Line="37" Column="37" />
-      <File FileName="Assets\Character\Player\Bullet.cs" Line="3" Column="3" />
+      <File FileName="Assets\Character\Player\ThianaCtrl.cs" Line="64" Column="64" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
