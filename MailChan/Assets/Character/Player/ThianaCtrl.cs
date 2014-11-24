@@ -3,15 +3,17 @@ using System.Collections;
 using System;
 
 public class ThianaCtrl : MonoBehaviour {
-		public float speed = 196f;
-		public float jumpForce = 320f;
-		bool jumpFlag = false;
-		public int bulletMaxNum = 3; 
-		private bool facingRight = true;
-		bool walkFlag = false;
-		bool shotFlag = false;
-		public GameObject bullet;	//PLayerBulletのプレハブ
-		int counter = 0;
+		public float speed = 196f;			//横移動速度
+		public float jumpForce = 320f;		//ジャンプ力
+		public int bulletMaxNum = 3; 		//画面内の弾の最大数
+		private bool facingRight = true;	//向いてる方向
+		bool jumpFlag = false;				//ジャンプフラグ
+		bool walkFlag = false;				//横移動フラグ
+		bool shotFlag = false;				//ショットフラグ
+		public GameObject bullet;			//PLayerBulletのプレハブ
+		private int maxLifePoint = 28;		//最大ライフポイント
+		private int lifePoint = 28;			//ライフポイント
+
 
 		void Start(){
 
@@ -68,14 +70,8 @@ public class ThianaCtrl : MonoBehaviour {
 						Bullet b = bulletCtrl.GetComponent<Bullet> ();
 						b.ShotCtrl (facingRight);
 						shotFlag = true;
-						counter = 0;
-				}
-	
-				if (shotFlag) {
-						counter++;
-						if (counter > 30) {
-								shotFlag = false;
-						}
+
+						lifePoint -= 1;
 				}
 
 				//アニメーション用フラグを設定
@@ -92,10 +88,6 @@ public class ThianaCtrl : MonoBehaviour {
 				Debug.Log ("jumpFlag:" + jumpFlag);
 				Debug.Log ("v:" + rigidbody2D.velocity);
 		}
-		
-		
-		void FixedUpdate ()
-		{}
 
 		//向き判定
 		public int getFacingRight(){
@@ -118,6 +110,7 @@ public class ThianaCtrl : MonoBehaviour {
 				}
 		}
 
-
-
+		public int getLifePoint(){
+				return lifePoint;
+		}
 }

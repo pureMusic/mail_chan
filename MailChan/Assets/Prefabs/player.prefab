@@ -88,6 +88,7 @@ MonoBehaviour:
   jumpForce: 320
   bulletMaxNum: 3
   bullet: {fileID: 100000, guid: a40255b7607b44a4b8be7ea5c60141d5, type: 2}
+  lifeBar: {fileID: 100006, guid: 94bfc1ab370c8684098b75d6e0693678, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
