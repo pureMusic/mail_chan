@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BlockMove : MonoBehaviour {
+public class MoveBlock : MonoBehaviour {
 		public float moveLength = 256;
 		public float moveSpeed = 4;
 		public string moveVec = "H";
-		//private int counter;
 		private float moved = 0;
 		private int vecFlag = 1;
 

@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class ThianaCtrl : MonoBehaviour {
+public class PlayerCtrl : MonoBehaviour {
 		public float speed = 196f;			//横移動速度
 		public float jumpForce = 320f;		//ジャンプ力
 		public int bulletMaxNum = 3; 		//画面内の弾の最大数
@@ -13,14 +13,17 @@ public class ThianaCtrl : MonoBehaviour {
 		public GameObject bullet;			//PLayerBulletのプレハブ
 		private int maxLifePoint = 28;		//最大ライフポイント
 		private int lifePoint = 28;			//ライフポイント
+		private float maxChargePoint = 28f;	//最大チャージポイント
+		private float chargePoint = 0;		//チャージ量
+		public float chargeTime = 2f;		//チャージにかかる秒数
 
 
 		void Start(){
-
+				lifePoint = maxLifePoint;
 		}
 
 		void Update(){
-
+				print ("FPS:" + 1 / Time.deltaTime);
 				Vector2 v = rigidbody2D.velocity;
 
 				//ジャンプ制御------------------------------------
@@ -71,8 +74,15 @@ public class ThianaCtrl : MonoBehaviour {
 						b.ShotCtrl (facingRight);
 						shotFlag = true;
 
-						lifePoint -= 1;
+						StartCoroutine ("ShotCheck");
+
+						Damage(1);
 				}
+				ChargeCheck ();
+				if (!Input.GetKey ("return")) {
+						chargePoint = 0;
+				}
+
 
 				//アニメーション用フラグを設定
 				GetComponent<Animator> ().SetBool ("walkFlag", walkFlag);
@@ -94,23 +104,67 @@ public class ThianaCtrl : MonoBehaviour {
 				return (facingRight ? 1 : -1);
 		}
 
-		//移動床の制御---------------------------------------------------------------
+		//ダメージ制御-------------------------------------------------------------
+		public void Damage(int damage){
+				lifePoint -= damage;
+				if (lifePoint <= 0) {
+						lifePoint = 0;
+						//死亡判定
+				}
+				GameObject lifeBar = GameObject.Find ("LifeBar1");
+				Vector2 vec = lifeBar.transform.localScale;
+				vec.y = lifePoint;
+				lifeBar.transform.localScale = vec;
+		}
 
-		//床に乗る
+		//ショット制御--------------------------------------------------------------
+
+		//ショットモーション制御
+		IEnumerator ShotCheck(){
+				yield return new WaitForSeconds (0.4f);
+				shotFlag = false;
+		}
+
+		//チャージ時間管理
+		bool ChargeCheck(){
+				chargePoint += maxChargePoint / (chargeTime * 50);
+				if (chargePoint > maxChargePoint) {
+						chargePoint = maxChargePoint;
+				}
+
+				GameObject chargeBar = GameObject.Find ("ChargeBar1");
+				Vector2 vec = chargeBar.transform.localScale;
+				vec.y = chargePoint;
+				chargeBar.transform.localScale = vec;
+
+				return (chargePoint == maxChargePoint ? true : false);
+		}
+
+
+		//接触制御--------------------------------------------------------------------
+
+		//接触時の処理
 		void OnTriggerEnter2D(Collider2D col){
+				//移動床に乗る
 				if (transform.parent == null && col.gameObject.tag == "MoveBlock") {
 						transform.parent = col.gameObject.transform;
 				}
+
 		}
 
-		//床から離れる
+		//離れた時の処理
 		void OnTriggerExit2D(Collider2D col){
+				//移動床から離れる
 				if(transform.parent != null && col.gameObject.tag == "MoveBlock"){
 						transform.parent = null;
 				}
 		}
 
-		public int getLifePoint(){
-				return lifePoint;
+		//接触中の処理
+		void OnTriggerStay2D(Collider2D col){
+
 		}
+
+		//ゲッタ・セッタ---------------------------------------------------------------
+	
 }

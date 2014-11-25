@@ -12,13 +12,13 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: shotFlag
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
@@ -131,7 +131,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 514af103afee9e04abf55366b2b7699d, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 216, y: -84, z: 0}
+  m_Position: {x: 192, y: -84, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -146,7 +146,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 03248604c7dace84fb7c4f82b2845a16, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 216, y: 60, z: 0}
+  m_Position: {x: 192, y: 48, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -161,7 +161,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 3b9680419519b5148aeff274d7646dfa, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 480, y: -84, z: 0}
+  m_Position: {x: 456, y: -96, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -197,5 +197,5 @@ StateMachine:
       second:
       - {fileID: 110131399}
   m_MotionSetCount: 1
-  m_AnyStatePosition: {x: -24, y: -96, z: 0}
+  m_AnyStatePosition: {x: 228, y: -132, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
