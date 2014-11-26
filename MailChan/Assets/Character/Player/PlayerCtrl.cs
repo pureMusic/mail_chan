@@ -23,7 +23,6 @@ public class PlayerCtrl : MonoBehaviour {
 		}
 
 		void Update(){
-				print ("FPS:" + 1 / Time.deltaTime);
 				Vector2 v = rigidbody2D.velocity;
 
 				//ジャンプ制御------------------------------------
@@ -68,15 +67,13 @@ public class PlayerCtrl : MonoBehaviour {
 				if (Input.GetKeyDown ("return")) {
 						Vector3 v3 = transform.position;
 						v3.x += 38 * getFacingRight();
-						//Instantiate (bullet, v3, transform.rotation);
+
 						GameObject bulletCtrl = Instantiate (bullet, v3, transform.rotation) as GameObject;
 						Bullet b = bulletCtrl.GetComponent<Bullet> ();
-						b.ShotCtrl (facingRight);
+						b.ShotCtrl (0 ,facingRight);
 						shotFlag = true;
 
 						StartCoroutine ("ShotCheck");
-
-						Damage(1);
 				}
 				ChargeCheck ();
 				if (!Input.GetKey ("return")) {
@@ -95,6 +92,7 @@ public class PlayerCtrl : MonoBehaviour {
 
 		//デバッグ用
 		void MyDebug(){
+				print ("FPS:" + 1 / Time.deltaTime);
 				Debug.Log ("jumpFlag:" + jumpFlag);
 				Debug.Log ("v:" + rigidbody2D.velocity);
 		}
