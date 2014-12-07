@@ -7,7 +7,6 @@ TagManager:
   - Enemy
   - EnemyBullet
   - PlayerBullet
-  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
@@ -44,10 +43,6 @@ TagManager:
   - name: Default
     userID: 0
     uniqueID: 0
-    locked: 0
-  - name: back_tutorial
-    userID: 6
-    uniqueID: 3033606373
     locked: 0
   - name: background1
     userID: 1

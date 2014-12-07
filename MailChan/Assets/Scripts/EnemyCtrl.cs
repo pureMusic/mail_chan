@@ -11,8 +11,6 @@ public class EnemyCtrl : MonoBehaviour {
 		public Sprite attackSprite;		//攻撃時スプライト
 		public GameObject bullet;		//Bulletのプレハブ
 		public bool faceRight = false;	//向いてる方向
-		public GameObject destroy;		//消滅エフェクトのプレハブ
-
 
 		// Use this for initialization
 		void Start () {
@@ -34,12 +32,12 @@ public class EnemyCtrl : MonoBehaviour {
 						Vector3 v3 = this.transform.position;
 						GameObject bulletCtrl = Instantiate (bullet, v3, this.transform.localRotation) as GameObject;
 						Bullet b = bulletCtrl.GetComponent<Bullet> ();
-						b.BulletCtrl (1, faceRight);
+						b.ShotCtrl (1, faceRight);
 
 						faceRight = (faceRight ? false : true);
 						GameObject bulletCtrl2 = Instantiate (bullet, v3, this.transform.localRotation) as GameObject;
 						Bullet b2 = bulletCtrl2.GetComponent<Bullet> ();
-						b2.BulletCtrl (0, faceRight);
+						b2.ShotCtrl (0, faceRight);
 
 						yield return new WaitForSeconds (2);
 						nowSprite.sprite = defSprite;
@@ -50,14 +48,8 @@ public class EnemyCtrl : MonoBehaviour {
 		//ダメージ制御-------------------------------------------------------------
 		public void Damage(int damage){
 				lifePoint -= damage;
-
-				//死亡判定
 				if (lifePoint <= 0) {
-						//消滅エフェクト
-						destroy = Instantiate (destroy, this.transform.position, this.transform.rotation) as GameObject;
-						Destroy (destroy, 1 / 6f);	//10F
-
-						//オブジェクト削除
+						//死亡判定
 						Destroy (this.gameObject);
 				}
 		}

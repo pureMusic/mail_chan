@@ -2,13 +2,8 @@ ToDoリスト
 
 ◇11月中にやること
 
-<<<<<<< Updated upstream
 johiroshi：ステージのプロトタイプをつくる
 HAZENFV：いろいろ
-=======
-H.J.：ステージのプロトタイプをつくる
-T.H.：いろいろ
->>>>>>> Stashed changes
 
 
 
